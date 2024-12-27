@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name', 60)->unique();
             $table->string('contact')->unique()->nullable();
             $table->boolean('status')->default(true);
-            /* aqui relacionar lo de phone y adress */
             $table->timestamps();
         });
     }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('payment_method_id')->constrained()
             ->cascadeOnUpdate()->cascadeOnDelete();
 
+            $table->unique(['sale_id', 'payment_method_id']);
             $table->timestamps();
         });
     }

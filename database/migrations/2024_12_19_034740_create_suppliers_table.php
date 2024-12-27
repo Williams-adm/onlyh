@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            /* aqui llamar a la tabal documentos para registrar el tipo de documento y su numero asociado al proveedor
-            tambien su dirección y telefono */
             $table->string('business_name')->unique();
             $table->enum('type', ['juridica', 'persona natural', 'otro']);
             $table->string('contac', 80)->nullable();

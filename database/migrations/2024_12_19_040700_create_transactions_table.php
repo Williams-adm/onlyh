@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('type', ['entrada', 'salida']);
             $table->string('operation', 55);
             $table->text('reazon')->nullable();
-            $table->string('type_voucher', 50)->nullable();
+            $table->enum('type_voucher', ['boleta', 'factura', 'otro'])->nullable();
             $table->string('num_voucher', 15)->unique()->nullable();
             $table->string('path_voucher')->nullable();
             $table->decimal('total', 15, 2)->nullable();

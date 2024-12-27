@@ -19,7 +19,6 @@ return new class extends Migration
             $table->date('date_of_birth');
             $table->decimal('salary', 8, 2);
             $table->enum('payment_date', ['fin de mes', 'quincenal', 'semanal']);
-            /* Aqui para la foto usaremos la de la tabla image */
             $table->timestamps();
         });
     }

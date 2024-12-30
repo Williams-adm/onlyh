@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('date_of_birth')->nullable();
             $table->string('business_name')->unique()->nullable();
             $table->string('email')->unique()->nullable();
-            $table->enum('type_record', ['manual', 'automático']);
+            $table->enum('type_record', ['manual', 'automatico']);
             $table->timestamps();
         });
     }

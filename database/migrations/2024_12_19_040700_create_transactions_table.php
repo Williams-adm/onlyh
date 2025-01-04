@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('num_transaction', 15)->unique();
+            /* $table->string('num_transaction', 15)->unique(); */
             $table->enum('type', ['entrada', 'salida']);
             $table->string('operation', 55);
             $table->text('reazon')->nullable();

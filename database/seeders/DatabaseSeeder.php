@@ -23,6 +23,15 @@ class DatabaseSeeder extends Seeder
             DetailSeeder::class,
             ProductSeeder::class,
             DiscountSeeder::class,
+            InventorySeeder::class,
+            TransactionSeeder::class,
+            DetailTransactionSeeder::class,
+            SaleSeeder::class,
+            DetailSaleSeeder::class,
+            PaymentMethodSeeder::class,
+            PaymentMethodSaleSeeder::class,
+            CashCountSeeder::class,
+            CashTransactionSeeder::class,
         ]);
     }
 }

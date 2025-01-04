@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class DetailTransaction extends Model
 {
-    /* Verificar si dejamos o eliminamos el modelo */
+    use HasFactory;
+
     protected $table = 'detail_transaction';
 }

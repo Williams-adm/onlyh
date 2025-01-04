@@ -15,7 +15,7 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        Product::factory(10)->create();
+        Product::factory(20)->create();
 
         $products = Product::all();
 
@@ -30,9 +30,8 @@ class ProductSeeder extends Seeder
 
         $details = Detail::all();
 
-        // Crear productos y asociar cada uno con los 3 detalles
+        // Recorre los productos y asocia cada uno con los 3 detalles
         $products->each(function ($product) use ($details) {
-            // Asociar los detalles con el producto
             $product->details()->attach($details->pluck('id')->toArray());
         });
     }

@@ -4,16 +4,28 @@ namespace App\Http\Controllers\Api;
 
 /* use App\Http\Controllers\Controller; */
 
+use App\Filters\Api\Common\LikeFilter;
+use App\Filters\Api\Common\OrderByFilter;
+use App\Filters\Api\Common\StatusFilter;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Repositories\BaseRepository;
 
 class CategoryController extends BaseController
 {
     /**
-     * Pasar el modelo al constructor de base controller
+     * Instancia del repositorio y se pasa el modelo y filtros.
      */
     public function __construct()
     {
-        parent::__construct(new Category());
+        $model = new Category();
+        $filters = [
+            OrderByFilter::class,
+            LikeFilter::class,
+            StatusFilter::class,
+        ];
+
+        $repository = new BaseRepository($model, $filters);
+
+        parent::__construct($repository);
     }
 }

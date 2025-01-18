@@ -1,14 +1,15 @@
 <?php 
 
-namespace App\Repositories;
+namespace App\Repositories\Api;
 
+use App\Repositories\Api\Contracts\RepositoryInterface;
 use App\Traits\Api\ResolvesRequests;
 use App\Traits\Api\ResolvesResources;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 
-class BaseRepository
+class BaseRepository implements RepositoryInterface
 {
     use ResolvesResources;
     use ResolvesRequests;
@@ -36,9 +37,9 @@ class BaseRepository
     /**
      * Listado de todos los registros
      */
-    public function getAll(int $perPage, Request $request)
+    public function getAll(int $perPage)
     {
-        $query = $this->applyFilters($request);
+        $query = $this->applyFilters();
         $data = $query->paginate($perPage);
         return $this->resourceCollection($data);
     }
@@ -49,7 +50,7 @@ class BaseRepository
     public function create(Request $request){
         $validated = $this->validateStoreRequest($request);
         $data = $this->model->create($validated);
-
+        $data->refresh();
         return $this->resource($data);
     }
 

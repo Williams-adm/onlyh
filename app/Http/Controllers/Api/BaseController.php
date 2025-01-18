@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\BaseRepository;
+use App\Http\Requests\Api\Base\PaginationRequest;
+use App\Repositories\Api\BaseRepository;
 use Illuminate\Http\Request;
 
 abstract class BaseController extends Controller
@@ -18,14 +19,10 @@ abstract class BaseController extends Controller
     /**
      * Listado de tipo getAll
      */
-    public function index(Request $request) 
+    public function index(PaginationRequest $request) 
     {
         $perPage = $request->get('per_page', 15);
-        if (!is_numeric($perPage) || $perPage < 0) {
-            return response()->json(['error' => 'El valor de "per_page" debe ser un número mayor que 0.'], 400);
-        }
-
-        return $this->repository->getAll($perPage, $request);
+        return $this->repository->getAll($perPage);
     }
 
     /**

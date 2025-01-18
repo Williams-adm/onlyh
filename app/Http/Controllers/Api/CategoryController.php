@@ -8,7 +8,7 @@ use App\Filters\Api\Common\LikeFilter;
 use App\Filters\Api\Common\OrderByFilter;
 use App\Filters\Api\Common\StatusFilter;
 use App\Models\Category;
-use App\Repositories\BaseRepository;
+use App\Repositories\Api\BaseRepository;
 
 class CategoryController extends BaseController
 {

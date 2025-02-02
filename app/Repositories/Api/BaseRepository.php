@@ -16,11 +16,13 @@ class BaseRepository implements RepositoryInterface
 
     protected $model;
     protected $filters = [];
+    protected $relationships = [];
 
-    public function __construct(Model $model, array $filters = [])
+    public function __construct(Model $model, array $filters = [], array $relationships = [])
     {
         $this->model = $model;
         $this->filters = $filters;
+        $this->relationships = $relationships;
     }
 
     /**
@@ -39,7 +41,13 @@ class BaseRepository implements RepositoryInterface
      */
     public function getAll(int $perPage)
     {
+
         $query = $this->applyFilters();
+
+        if (!empty($this->relationships)) {
+            $query = $query->with($this->relationships);
+        }
+
         $data = $query->paginate($perPage);
         return $this->resourceCollection($data);
     }
@@ -60,6 +68,10 @@ class BaseRepository implements RepositoryInterface
      */
     public function getById(int $id){
         $data = $this->model->findOrFail($id);
+
+        if(!empty($this->relationships)){
+            $data->load($this->relationships);
+        }
         return $this->resource($data);
     }
 

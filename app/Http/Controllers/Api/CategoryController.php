@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-/* use App\Http\Controllers\Controller; */
-
 use App\Filters\Api\Common\LikeFilter;
 use App\Filters\Api\Common\OrderByFilter;
 use App\Filters\Api\Common\StatusFilter;

@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('city', 60);
             $table->string('street');
             $table->string('number', 10);
-            $table->unsignedBigInteger('addressable_id');
-            $table->string('addressable_type');
+            $table->morphs('addressable');
             $table->timestamps();
         });
     }

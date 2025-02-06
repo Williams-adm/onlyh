@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cash_counts', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 15)->unique();
-            $table->decimal('total_sale', 10, 2);
-            $table->decimal('total_income', 10, 2);
-            $table->decimal('total_outflow', 10, 2);
-            $table->decimal('total_cash', 15, 2);
-            $table->string('path');
+            $table->decimal('sub_total', 15, 2);
+            $table->decimal('shipment_cost', 10, 2);
+            $table->decimal('total', 16, 2);
+            $table->enum('status', ['pending', 'paid', 'cancelled']);
+            $table->date('order_date');
 
-            $table->foreignId('branch_id')->constrained()
+            $table->foreignId('customer_id')->constrained()
             ->cascadeOnUpdate()->cascadeOnDelete();
 
             $table->timestamps();
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cash_counts');
+        Schema::dropIfExists('orders');
     }
 };

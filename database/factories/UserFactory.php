@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Customer;
 use App\Models\Employee;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
  */
 class UserFactory extends Factory
 {
-    protected static $employeeIds = [];
+    protected static $customerIds = [];
     /**
      * Define the model's default state.
      *
@@ -20,25 +21,22 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $employees = Employee::doesntHave('user')->orderBy('id')->pluck('id');
+        $customers = Customer::doesntHave('user')->orderBy('id')->pluck('id');
 
-        if ($employees->isEmpty()) {
-            throw new \Exception('No hay empleados disponibles para asociar con un usuario');
+        if ($customers->isEmpty()) {
+            throw new \Exception('No hay clientes disponibles para asociar con un usuario');
         }
 
-        if (empty(self::$employeeIds)) {
-            self::$employeeIds = $employees->toArray();
+        if (empty(self::$customerIds)) {
+            self::$customerIds = $customers->toArray();
         }
 
-        $employeeId = array_shift(self::$employeeIds);
-
-        $employee = Employee::find($employeeId);
-        $numAletory = $this->faker->unique()->randomNumber(5, true);
+        $customerId = array_shift(self::$customerIds);
 
         return [
-            'user_name' => strtolower(Str::slug($employee->name . $numAletory)),
+            'email' => $this->faker->safeEmail(),
             'password' => Hash::make($this->faker->password()),
-            'employee_id' => $employeeId,
+            
         ];
     }
 }

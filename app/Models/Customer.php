@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Customer extends Model
 {
@@ -15,15 +16,20 @@ class Customer extends Model
     {
         return $this->morphMany(Address::class, 'addressable')->chaperone();
     }
-
-    public function documentTypes(): MorphMany
+    
+    public function carts(): HasMany
     {
-        return $this->morphMany(DocumentType::class, 'documentable')->chaperone();
+        return $this->hasMany(Cart::class)->chaperone();
     }
 
-    public function notes(): MorphMany
+    public function documentTypes(): MorphOne
     {
-        return $this->morphMany(Note::class, 'noteable')->chaperone();
+        return $this->morphOne(DocumentType::class, 'documentable');
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class)->chaperone();
     }
 
     public function phones(): MorphMany
@@ -31,8 +37,13 @@ class Customer extends Model
         return $this->morphMany(Phone::class, 'phoneable')->chaperone();
     }
 
-    public function sales(): HasMany
+    public function reviews(): HasMany
     {
-        return $this->hasMany(Sale::class)->chaperone();
+        return $this->hasMany(Review::class);
+    }
+
+    public function user(): MorphOne
+    {
+        return $this->morphOne(User::class, 'userable');
     }
 }

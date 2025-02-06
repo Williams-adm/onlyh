@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class PaymentMethod extends Model
 {
-    public function sales(): BelongsToMany
+    public function orders(): BelongsToMany
     {
-        return $this->belongsToMany(Sale::class, 'payment_method_sale')
-        ->withPivot('quantity')->withTimestamps();
+        return $this->belongsToMany(Order::class, 'payment_method_order')
+        ->withPivot('status', 'amount')->withTimestamps();
     }
 }

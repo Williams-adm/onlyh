@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payment_method_sale', function (Blueprint $table) {
+        Schema::create('inventories', function (Blueprint $table) {
             $table->id();
-            $table->decimal('quantity', 15, 2);
+            $table->integer('stock_min');
+            $table->integer('stock_max');
+            $table->integer('current_stock');
+            $table->decimal('selling_price', 10, 2);
 
-            $table->foreignId('sale_id')->constrained()
-            ->cascadeOnUpdate()->cascadeOnDelete();
-            
-            $table->foreignId('payment_method_id')->constrained()
+            $table->foreignId('product_id')->constrained()
             ->cascadeOnUpdate()->cascadeOnDelete();
 
-            $table->unique(['sale_id', 'payment_method_id']);
+            $table->unique(['product_id']);
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payment_method_sale');
+        Schema::dropIfExists('inventories');
     }
 };

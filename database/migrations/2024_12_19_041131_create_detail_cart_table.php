@@ -11,15 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employee_documents', function (Blueprint $table) {
+        Schema::create('detail_cart', function (Blueprint $table) {
             $table->id();
-            $table->enum('document_type', ['cv', 'copia de documento', 'otros']);
-            $table->string('document_path');
-            
-            $table->foreignId('employee_id')->constrained()
+            $table->integer('quantity');
+            $table->decimal('unit_price', 10, 2);
+            $table->decimal('discount', 10, 2);
+
+            $table->foreignId('cart_id')->constrained()
             ->cascadeOnUpdate()->cascadeOnDelete();
             
-            $table->unique(['employee_id', 'document_type']);
+            $table->foreignId('inventory_id')->constrained()
+            ->cascadeOnUpdate()->cascadeOnDelete();
+
+            $table->unique(['cart_id', 'inventory_id']);
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employee_documents');
+        Schema::dropIfExists('detail_cart');
     }
 };

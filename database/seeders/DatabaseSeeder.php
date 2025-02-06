@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CustomerSeeder::class,
             CategorySeeder::class,
-            BranchSeeder::class,
             SupplierSeeder::class,
             DetailSeeder::class,
             ProductSeeder::class,
@@ -26,12 +25,7 @@ class DatabaseSeeder extends Seeder
             InventorySeeder::class,
             TransactionSeeder::class,
             DetailTransactionSeeder::class,
-            SaleSeeder::class,
-            DetailSaleSeeder::class,
             PaymentMethodSeeder::class,
-            PaymentMethodSaleSeeder::class,
-            CashCountSeeder::class,
-            CashTransactionSeeder::class,
         ]);
     }
 }

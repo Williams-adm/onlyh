@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Employee extends Model
 {
@@ -17,24 +17,9 @@ class Employee extends Model
         return $this->morphMany(Address::class, 'addressable')->chaperone();
     }
 
-    public function documentTypes(): MorphMany
+    public function documentTypes(): MorphOne
     {
-        return $this->morphMany(DocumentType::class, 'documentable')->chaperone();
-    }
-
-    public function employeeDocuments(): HasMany
-    {
-        return $this->hasMany(EmployeeDocument::class)->chaperone();
-    }
-
-    public function images(): MorphMany
-    {
-        return $this->morphMany(Image::class, 'imageable')->chaperone();
-    }
-
-    public function notes(): MorphMany
-    {
-        return $this->morphMany(Note::class, 'noteable')->chaperone();
+        return $this->morphOne(DocumentType::class, 'documentable');
     }
     
     public function phones(): MorphMany
@@ -42,13 +27,8 @@ class Employee extends Model
         return $this->morphMany(Phone::class, 'phoneable')->chaperone();
     }
 
-    public function sales(): HasMany
+    public function user(): MorphOne
     {
-        return $this->hasMany(Sale::class)->chaperone();
-    }
-
-    public function user(): HasOne
-    {
-        return $this->hasOne(User::class);
+        return $this->morphOne(User::class, 'userable');
     }
 }

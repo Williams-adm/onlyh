@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cash_transactions', function (Blueprint $table) {
+        Schema::create('sub_categories', function (Blueprint $table) {
             $table->id();
-            $table->decimal('amount', 10, 2);
-            $table->enum('type', ['salida', 'entrada']);
-            $table->text('description');
+            $table->string('name', 50)->unique();
+            $table->text('description')->nullable();
+            $table->boolean('status')->default(true);
 
-            $table->foreignId('cash_count_id')->nullable()->constrained()
-            ->cascadeOnUpdate()->nullOnDelete();
-
+            $table->foreignId('category_id')->constrained()
+            ->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cash_transactions');
+        Schema::dropIfExists('sub_categories');
     }
 };

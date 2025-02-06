@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('additional_features')->nullable();
             $table->boolean('status')->default(true);
 
-            $table->foreignId('category_id')->nullable()->constrained()
+            $table->foreignId('sub_category_id')->nullable()->constrained()
             ->cascadeOnUpdate()->nullOnDelete();
 
             $table->timestamps();

@@ -19,6 +19,11 @@ class Category extends Model
         return $this->hasMany(Product::class)->chaperone();
     }
 
+    public function subCategories(): HasMany
+    {
+        return $this->hasMany(SubCategory::class)->chaperone();
+    }
+
     protected function name(): Attribute
     {
         return Attribute::make(

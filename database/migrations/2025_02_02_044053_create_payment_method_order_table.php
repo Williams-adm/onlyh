@@ -11,20 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detail_sale', function (Blueprint $table) {
+        Schema::create('payment_method_order', function (Blueprint $table) {
             $table->id();
-            $table->integer('quantity');
-            $table->decimal('unit_price', 7, 2);
-            $table->decimal('discount', 7, 2);
-            $table->decimal('amount', 10, 2);
+            $table->enum('status', ['pending', 'completed', 'failed'])->default('pending');
+            $table->decimal('amount', 15, 2);
 
-            $table->foreignId('sale_id')->constrained()
+            $table->foreignId('order_id')->constrained()
             ->cascadeOnUpdate()->cascadeOnDelete();
             
-            $table->foreignId('inventory_id')->constrained(table: 'inventory')
+            $table->foreignId('payment_method_id')->constrained()
             ->cascadeOnUpdate()->cascadeOnDelete();
 
-            $table->unique(['sale_id', 'inventory_id']);
+            $table->unique(['order_id', 'payment_method_id']);
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detail_sale');
+        Schema::dropIfExists('payment_method_order');
     }
 };

@@ -22,6 +22,9 @@ class DocumentTypeFactory extends Factory
         ];
     }
 
+    /**
+     * Pasar un tipo de doc, diferente al dni
+     */
     public function configureDocType(string $type): self
     {
         return $this->state(function (array $attributes) use ($type) {

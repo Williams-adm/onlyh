@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Supplier extends Model
 {
@@ -13,9 +14,9 @@ class Supplier extends Model
         return $this->morphMany(Address::class, 'addressable')->chaperone();
     }
 
-    public function documentTypes(): MorphMany
+    public function documentTypes(): MorphOne
     {
-        return $this->morphMany(DocumentType::class, 'documentable')->chaperone();
+        return $this->morphOne(DocumentType::class, 'documentable');
     }
 
     public function phones(): MorphMany

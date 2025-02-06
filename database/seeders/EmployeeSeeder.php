@@ -5,9 +5,6 @@ namespace Database\Seeders;
 use App\Models\Address;
 use App\Models\DocumentType;
 use App\Models\Employee;
-use App\Models\EmployeeDocument;
-use App\Models\Image;
-use App\Models\Note;
 use App\Models\Phone;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -29,7 +26,6 @@ class EmployeeSeeder extends Seeder
         ]);
 
         Employee::factory(5)->create();
-        EmployeeDocument::factory(18)->create();
 
         $employees = Employee::all();
         foreach ($employees as $employeeAddress) {
@@ -43,22 +39,6 @@ class EmployeeSeeder extends Seeder
             DocumentType::factory(1)->create([
                 'documentable_id' => $employeeDocumentType,
                 'documentable_type' => Employee::class
-            ]);
-        }
-
-        foreach ($employees as $employee) {
-            Image::factory()
-            ->configureImage('EmployeesImg', "{$employee->name} {$employee->paternal_surname} {$employee->maternal_surname}")
-            ->create([
-                'imageable_id' => $employee->id,
-                'imageable_type' => Employee::class,
-            ]);
-        }
-
-        foreach ($employees as $employeeNote) {
-            Note::factory(1)->create([
-                'noteable_id' => $employeeNote->id,
-                'noteable_type' => Employee::class
             ]);
         }
 

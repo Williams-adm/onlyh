@@ -11,21 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventory', function (Blueprint $table) {
+        Schema::create('detail_order', function (Blueprint $table) {
             $table->id();
-            $table->integer('stock_min');
-            $table->integer('stock_max');
-            $table->integer('current_stock');
-            $table->decimal('selling_price', 8, 2);
-            $table->boolean('status')->default(true);
+            $table->integer('quantity');
+            $table->decimal('unit_price', 10, 2);
+            $table->decimal('discount', 10, 2);
 
-            $table->foreignId('product_id')->constrained()
+            $table->foreignId('inventory_id')->constrained()
             ->cascadeOnUpdate()->cascadeOnDelete();
 
-            $table->foreignId('branch_id')->constrained()
+            $table->foreignId('order_id')->constrained()
             ->cascadeOnUpdate()->cascadeOnDelete();
 
-            $table->unique(['product_id', 'branch_id']);
             $table->timestamps();
         });
     }
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventory');
+        Schema::dropIfExists('detail_order');
     }
 };

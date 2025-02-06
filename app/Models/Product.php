@@ -6,21 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Product extends Model
 {
     use HasFactory;
 
-    public function branches(): BelongsToMany
+    public function subCategory(): BelongsTo
     {
-        return $this->belongsToMany(Branch::class, 'inventory')
-        ->withPivot('stock_min', 'stock_max', 'current_stock', 'selling_price', 'status')->withTimestamps();
-    }
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(SubCategory::class);
     }
 
     public function details(): BelongsToMany{
@@ -30,5 +26,15 @@ class Product extends Model
     public function images(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable')->chaperone();
+    }
+
+    public function inventory(): HasOne
+    {
+        return $this->hasOne(Inventory::class);
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
     }
 }

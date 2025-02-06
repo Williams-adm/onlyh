@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('prefix', 5);
             $table->string('number', 12)->unique();
-            $table->unsignedBigInteger('phoneable_id');
-            $table->string('phoneable_type');
+            $table->morphs('phoneable');
             $table->timestamps();
         });
     }

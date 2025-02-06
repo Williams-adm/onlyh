@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('detail_transaction', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity');
-            $table->decimal('purcharse_price', 7, 2)->nullable();
-            $table->decimal('profit', 4, 2)->nullable();
+            $table->decimal('purcharse_price', 10, 2)->nullable();
+            $table->integer('profit')->nullable();
 
             $table->foreignId('transaction_id')->constrained()
             ->cascadeOnUpdate()->cascadeOnDelete();
 
-            $table->foreignId('inventory_id')->constrained(table: 'inventory')
+            $table->foreignId('inventory_id')->constrained()
             ->cascadeOnUpdate()->cascadeOnDelete();
 
             $table->unique(['transaction_id', 'inventory_id']);

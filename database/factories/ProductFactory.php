@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +17,7 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $category = Category::all()->pluck('id')->toArray();
+        $subCategory = SubCategory::all()->pluck('id')->toArray();
 
         return [
             'name' => strtolower($this->faker->unique()->words(2, true)),
@@ -25,7 +25,7 @@ class ProductFactory extends Factory
             'description' => $this->faker->text(150),
             'usage_recomendation' => $this->faker->text(100),
             'additional_features' => $this->faker->text(100),
-            'category_id' => $this->faker->randomElement($category),
+            'sub_category_id' => $this->faker->randomElement($subCategory),
         ];
     }
 }

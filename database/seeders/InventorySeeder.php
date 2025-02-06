@@ -19,6 +19,7 @@ class InventorySeeder extends Seeder
         $inventories = Inventory::all();
         $discounts = Discount::all();
 
+        /* Rellenado de la tabla discount_inventory */
         $inventories->each(function ($inventory) use ($discounts) {
             $randomDiscounts = $discounts->random();
             $inventory->discounts()->attach($randomDiscounts->id);

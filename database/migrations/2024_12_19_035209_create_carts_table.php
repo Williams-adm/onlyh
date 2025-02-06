@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notes', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->text('note_text');
-            $table->dateTime('reminder_date');
-            $table->boolean('completed')->default(false);
-            $table->unsignedBigInteger('noteable_id');
-            $table->string('noteable_type');
+            $table->enum('status', ['active', 'inactive', 'cancelled'])->default('active');
+            $table->decimal('sub_total', 15, 2);
+
+            $table->foreignId('customer_id')->nullable()->constrained()
+            ->cascadeOnUpdate()->cascadeOnDelete();
+
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notes');
+        Schema::dropIfExists('carts');
     }
 };

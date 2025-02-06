@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Address;
 use App\Models\Customer;
 use App\Models\DocumentType;
-use App\Models\Note;
 use App\Models\Phone;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,7 +16,14 @@ class CustomerSeeder extends Seeder
      */
     public function run(): void
     {
-        Customer::factory(15)->create();
+        Customer::create([
+            'name' => strtolower('Elmo'),
+            'paternal_surname' => strtolower('Lujan'),
+            'maternal_surname' => strtolower('Carrion'),
+            'date_of_birth' => '2000-10-05' 
+        ]);
+
+        Customer::factory(14)->create();
 
         $customer = Customer::all();
 
@@ -32,13 +38,6 @@ class CustomerSeeder extends Seeder
             DocumentType::factory(1)->create([
                 'documentable_id' => $customerDocumentType->id,
                 'documentable_type' => Customer::class
-            ]);
-        }
-        
-        foreach ($customer as $customerNotes) {
-            Note::factory(1)->create([
-                'noteable_id' => $customerNotes->id,
-                'noteable_type' => Customer::class
             ]);
         }
         

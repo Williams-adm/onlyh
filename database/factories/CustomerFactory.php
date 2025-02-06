@@ -17,13 +17,10 @@ class CustomerFactory extends Factory
     public function definition(): array
     {
         return [
-            'type' => 'otro',
             'name' => $this->faker->words(2, true),
             'paternal_surname' => $this->faker->word(),
             'maternal_surname' => $this->faker->word(),
             'date_of_birth' => $this->faker->date(),
-            'email' => $this->faker->safeEmail(),
-            'type_record' => 'automatico',
         ];
     }
 }

@@ -11,16 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('discount_inventory', function (Blueprint $table) {
+        Schema::create('shipments', function (Blueprint $table) {
             $table->id();
+            $table->decimal('shipment_cost', 10, 2);
+            $table->enum('status', ['pending','processing', 'shipped', 'delivered']);
+            $table->string('tracking_number', 15)->nullable();
+            $table->date('shipping_date');
+            $table->date('desired_delivery_date');
 
-            $table->foreignId('inventory_id')->constrained()
+            $table->foreignId('order_id')->constrained()
             ->cascadeOnUpdate()->cascadeOnDelete();
-            
-            $table->foreignId('discount_id')->constrained()
+
+            $table->foreignId('shipping_method_id')->constrained()
             ->cascadeOnUpdate()->cascadeOnDelete();
-            
-            $table->unique(['inventory_id', 'discount_id']);
+
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('discount_inventory');
+        Schema::dropIfExists('shipments');
     }
 };

@@ -13,7 +13,7 @@ class PaymentMethodSeeder extends Seeder
      */
     public function run(): void
     {
-        $methods = ['efectivo', 'Tarjeta de credito', 'Tarjeta debito', 'Transferencia bancaria', 'pago digital'];
+        $methods = ['Tarjeta', 'billetera digital'];
         foreach ($methods as $method) {
             PaymentMethod::create([
                 'name_method' => strtolower($method)

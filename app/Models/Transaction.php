@@ -8,11 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Transaction extends Model
 {
-    public function branch(): BelongsTo
-    {
-        return $this->belongsTo(Branch::class);
-    }
-
     public function inventories(): BelongsToMany
     {
         return $this->belongsToMany(Inventory::class, 'detail_transaction')

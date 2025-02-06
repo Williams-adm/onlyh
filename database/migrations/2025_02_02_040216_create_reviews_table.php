@@ -11,16 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('discount_inventory', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
+            $table->enum('rating', [1, 2, 3, 4, 5]);
+            $table->text('review')->nullable();
 
-            $table->foreignId('inventory_id')->constrained()
+            $table->foreignId('product_id')->constrained()
             ->cascadeOnUpdate()->cascadeOnDelete();
-            
-            $table->foreignId('discount_id')->constrained()
+
+            $table->foreignId('customer_id')->constrained()
             ->cascadeOnUpdate()->cascadeOnDelete();
-            
-            $table->unique(['inventory_id', 'discount_id']);
+
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('discount_inventory');
+        Schema::dropIfExists('reviews');
     }
 };

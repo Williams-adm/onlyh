@@ -15,22 +15,13 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $faker = FakerFactory::create();
+        $categories = ['Adornos', 'Iluminación', 'Muebles'];
 
-        Category::create([
-            'name' => strtolower('Luminaria'),
-            'description' => $faker->text(100)
-        ]);
-        Category::create([
-            'name' => strtolower('Adornos'),
-            'description' => $faker->text(100)
-        ]);
-        Category::create([
-            'name' => strtolower('Sofas'),
-            'description' => $faker->text(100)
-        ]);
-        Category::create([
-            'name' => strtolower('Juegos de Comedor'),
-            'description' => $faker->text(100)
-        ]);
+        foreach($categories as $category){
+            Category::create([
+                'name' => strtolower($category),
+                'description' => $faker->text(100)
+            ]);
+        }
     }
 }

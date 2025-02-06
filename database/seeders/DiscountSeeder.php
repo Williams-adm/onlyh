@@ -19,7 +19,7 @@ class DiscountSeeder extends Seeder
         Discount::create([
             'name' => strtolower('Descuento por otoño'),
             'description' => $faker->text(100),
-            'porcentage' => 0.15,
+            'porcentage' => 15,
             'start_date' => '2024-08-20 10:00:00',
             'end_date' => '2024-12-24'
         ]);
@@ -27,7 +27,7 @@ class DiscountSeeder extends Seeder
         Discount::create([
             'name' => strtolower('Descuento por nuevo cliente'),
             'description' => $faker->text(100),
-            'porcentage' => 0.25,
+            'porcentage' => 10,
             'start_date' => '2024-08-20 12:00:00',
             'end_date' => '2024-12-24'
         ]);

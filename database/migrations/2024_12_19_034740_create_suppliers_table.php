@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('business_name')->unique();
             $table->enum('type', ['juridica', 'persona natural', 'otro']);
-            $table->string('contac', 80)->nullable();
+            $table->string('contact', 80)->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

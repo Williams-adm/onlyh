@@ -19,12 +19,12 @@ class SupplierSeeder extends Seeder
         Supplier::create([
             'type' => 'juridica',
             'business_name' => strtolower('Pepito SAC'),
-            'contac' => 'pepito@gmail.com'
+            'contact' => 'pepito@gmail.com'
         ]);
         Supplier::create([
             'type' => 'juridica',
             'business_name' => strtolower('Fantastic SAC'),
-            'contac' => 'fantastic@gmail.com'
+            'contact' => 'fantastic@gmail.com'
         ]);
 
         $suppliers = Supplier::all();

@@ -19,7 +19,7 @@ class DetailTransactionFactory extends Factory
     protected static $inventoryID = [];
     public function definition(): array
     {
-        $profit = $this->faker->randomFloat(2, 0, 0.30);
+        $profit = $this->faker->randomFloat(2, 5, 3);
         $transaction_id = Transaction::all()->pluck('id');
 
         $inventory = Inventory::all()->pluck('id')->toArray();

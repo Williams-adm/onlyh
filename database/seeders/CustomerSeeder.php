@@ -23,7 +23,7 @@ class CustomerSeeder extends Seeder
             'date_of_birth' => '2000-10-05' 
         ]);
 
-        Customer::factory(14)->create();
+        Customer::factory(5)->create();
 
         $customer = Customer::all();
 

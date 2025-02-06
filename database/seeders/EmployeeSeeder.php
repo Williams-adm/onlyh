@@ -17,15 +17,13 @@ class EmployeeSeeder extends Seeder
     public function run(): void
     {
         Employee::create([
-            'name' => strtolower('elmo'),
-            'paternal_surname' => strtolower('lujan'),
-            'maternal_surname' => strtolower('carrion'),
+            'name' => strtolower('admin'),
+            'paternal_surname' => strtolower('todo'),
+            'maternal_surname' => strtolower('poderoso'),
             'date_of_birth' => '2000-05-18',
             'salary' => '1500.00',
             'payment_date' => strtolower('semanal')
         ]);
-
-        Employee::factory(5)->create();
 
         $employees = Employee::all();
         foreach ($employees as $employeeAddress) {

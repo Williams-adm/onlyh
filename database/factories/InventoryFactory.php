@@ -31,7 +31,6 @@ class InventoryFactory extends Factory
             'current_stock' => $this->faker->numberBetween(5, 14),
             'selling_price' => $this->faker->randomFloat(2, 20, 500),
             'product_id' => $productID,
-            'branch_id' => 1,
         ];
     }
 }

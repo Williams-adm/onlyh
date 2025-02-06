@@ -45,7 +45,6 @@ class TransactionSeeder extends Seeder
                 'type_voucher' => strtolower('factura'),
                 'num_voucher' => $numVoucher,
                 'path_voucher' => $VoucherName,
-                'branch_id' => 1,
                 'supplier_id' => $supplier_id
             ]);
         }
@@ -69,7 +68,6 @@ class TransactionSeeder extends Seeder
             'operation' => strtolower('Producto dañado'),
             'reazon' => "El producto no funciona de fabrica",
             'type_voucher' => strtolower('otro'),
-            'branch_id' => 1
         ]);
     }
 }

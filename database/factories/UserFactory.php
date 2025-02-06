@@ -36,7 +36,8 @@ class UserFactory extends Factory
         return [
             'email' => $this->faker->safeEmail(),
             'password' => Hash::make($this->faker->password()),
-            
+            'userable_id' => $customerId,
+            'userable_type' => Customer::class
         ];
     }
 }

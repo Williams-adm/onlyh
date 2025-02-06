@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('status')->default(true);
             $table->morphs('userable');
-            
+
+            $table->unique(['userable_type', 'userable_id']);
             $table->timestamps();
         });
     }
